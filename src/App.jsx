@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router"; // ✅ Include Route
 import axios from "axios";
 import "./AppStyles.css";
 import TaskList from "./components/TaskList";
 import AddTask from "./components/AddTask";
 import NavBar from "./components/NavBar";
-import { BrowserRouter as Router, Routes } from "react-router";
 
-const navigate = useNavigate();
-//With the routes in place, we can declare routes, Links
+const API_URL = process.env.API_URL || "http://localhost:8080";
 
 const App = () => {
-
   const [tasks, setTasks] = useState([]);
 
   async function fetchAllTasks() {
     try {
-      const response = await axios.get("http://localhost:8080/api/tasks");
+      const response = await axios.get(`${API_URL}/api/tasks`);
       setTasks(response.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -27,27 +25,40 @@ const App = () => {
     fetchAllTasks();
   }, []);
 
-    return(
+  return (
     <div>
       <NavBar />
       <Routes>
         <Route
-          path ="./TaskList" element = {<TaskList tasks={tasks} fetchAllTasks={fetchAllTasks} />} 
+          path="/"
+          element={<TaskList tasks={tasks} fetchAllTasks={fetchAllTasks} />}
         />
         <Route
-          path ="./AddTask" element ={<AddTask fetchAllTasks={fetchAllTasks} />} 
+          path="/add-task"
+          element={<AddTask fetchAllTasks={fetchAllTasks} />}
+        />
+        <Route
+          path="/completed"
+          element={
+            <TaskList
+              tasks={tasks.filter(task => task.completed)}
+              fetchAllTasks={fetchAllTasks}
+            />
+          }
+        />
+        <Route
+          path="/incomplete"
+          element={
+            <TaskList
+              tasks={tasks.filter(task => !task.completed)}
+              fetchAllTasks={fetchAllTasks}
+            />
+          }
         />
       </Routes>
-    </div>)
-
-}
-
-{/* <>
-<Link to ={`/Addtask/${Taskid}`}>AllTasks</Link>
-<Link to ="/">text</Link>
-<Link to ="/">text</Link>
-</> */}
-
+    </div>
+  );
+};
 
 const root = createRoot(document.getElementById("root"));
 root.render(
