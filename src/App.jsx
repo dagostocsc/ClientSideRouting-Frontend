@@ -10,13 +10,15 @@ import { BrowserRouter as Router, Routes } from "react-router";
 const navigate = useNavigate();
 //With the routes in place, we can declare routes, Links
 
+const url = process.env.API_URL || "http://localhost:8080/"
+
 const App = () => {
 
   const [tasks, setTasks] = useState([]);
 
   async function fetchAllTasks() {
     try {
-      const response = await axios.get("http://localhost:8080/api/tasks");
+      const response = await axios.get(`${API_URL}/API/Tasks`); 
       setTasks(response.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
