@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./AddTaskStyles.css";
+import { useNavigate } from "react-router";
 
 const AddTask = ({ fetchAllTasks }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const navigate = useNavigate(); //Created the navigate function
+  let navigate = useNavigate(); //Created the navigate function
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,7 +17,7 @@ const AddTask = ({ fetchAllTasks }) => {
         description,
       });
       fetchAllTasks();
-      navigate("/"); 
+      navigate("/");
     } catch (error) {
       console.error("Error adding task:", error);
     }

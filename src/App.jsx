@@ -5,13 +5,11 @@ import "./AppStyles.css";
 import TaskList from "./components/TaskList";
 import AddTask from "./components/AddTask";
 import NavBar from "./components/NavBar";
-import { BrowserRouter as Router, Routes } from "react-router";
+import { BrowserRouter as Router, Routes, Route } from "react-router";
 
-const navigate = useNavigate();
 //With the routes in place, we can declare routes, Links
 
 const App = () => {
-
   const [tasks, setTasks] = useState([]);
 
   async function fetchAllTasks() {
@@ -27,27 +25,30 @@ const App = () => {
     fetchAllTasks();
   }, []);
 
-    return(
+  return (
     <div>
       <NavBar />
       <Routes>
         <Route
-          path ="./TaskList" element = {<TaskList tasks={tasks} fetchAllTasks={fetchAllTasks} />} 
+          path="/"
+          element={<TaskList tasks={tasks} fetchAllTasks={fetchAllTasks} />}
         />
         <Route
-          path ="./AddTask" element ={<AddTask fetchAllTasks={fetchAllTasks} />} 
+          path="/add-task"
+          element={<AddTask fetchAllTasks={fetchAllTasks} />}
         />
       </Routes>
-    </div>)
+    </div>
+  );
+};
 
-}
-
-{/* <>
+{
+  /* <>
 <Link to ={`/Addtask/${Taskid}`}>AllTasks</Link>
 <Link to ="/">text</Link>
 <Link to ="/">text</Link>
-</> */}
-
+</> */
+}
 
 const root = createRoot(document.getElementById("root"));
 root.render(

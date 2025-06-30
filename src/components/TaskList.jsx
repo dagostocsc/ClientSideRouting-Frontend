@@ -6,7 +6,11 @@ const TaskList = ({ tasks, fetchAllTasks }) => {
     <div>
       {tasks.length > 0 ? (
         tasks.map((task) => (
-          <TaskCard key={task.id} task={task} fetchAllTasks={fetchAllTasks} />
+          <TaskCard
+            key={task.id}
+            task={task}
+            fetchAllTasks={fetchAllTasks}
+          ></TaskCard>
         ))
       ) : (
         <p>No tasks found</p>
