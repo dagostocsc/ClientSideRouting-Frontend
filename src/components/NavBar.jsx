@@ -5,14 +5,27 @@ import { NavLink } from "react-router";
 const NavBar = () => {
   return (
     <nav className="navbar">
-      {/* Currently, we're using <a> tags to navigate to different pages.
-      This means that every time we click on a link, the page will reload.
-      Let's fix that!
-      */}
-      <NavLink to="/">All Tasks</NavLink>
-      <NavLink to="/completed">Completed Tasks</NavLink>
-      <NavLink to="/incomplete">Incomplete Tasks</NavLink>
-      <NavLink to="/add-task">Add Task</NavLink>
+      <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+        All Tasks
+      </NavLink>
+      <NavLink
+        to="/completed"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        Completed Tasks
+      </NavLink>
+      <NavLink
+        to="/incomplete"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        Incomplete Tasks
+      </NavLink>
+      <NavLink
+        to="/add-task"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        Add Task
+      </NavLink>
     </nav>
   );
 };
