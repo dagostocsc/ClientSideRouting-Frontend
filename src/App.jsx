@@ -1,5 +1,4 @@
-require("dotenv").config()
-console.log(process.env)
+const API_URL = process.env.API_URL || "client-side-routing-backend-nine.vercel.app";
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router"; 
@@ -8,8 +7,6 @@ import "./AppStyles.css";
 import TaskList from "./components/TaskList";
 import AddTask from "./components/AddTask";
 import NavBar from "./components/NavBar";
-
-const API_URL = process.env.API_URL || "client-side-routing-backend-nine.vercel.app";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
