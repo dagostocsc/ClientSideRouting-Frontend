@@ -3,10 +3,10 @@ import axios from "axios";
 import "./AddTaskStyles.css";
 import { useNavigate } from "react-router";
 
-const AddTask = ({ fetchAllTasks, API_URL }) => {
+const AddTask = ({ fetchAllTasks, fetchAllUsers, API_URL, users }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [name, setName] = useState("");
+  const [selectedUser, setSelectedUser] = useState("");
 
   let navigate = useNavigate(); //Created the navigate function
 
@@ -16,13 +16,11 @@ const AddTask = ({ fetchAllTasks, API_URL }) => {
       await axios.post(`${API_URL}/api/tasks`, {
         title,
         description,
-      });
-
-      await axios.post(`${API_URL}/api/users`, {
-        name,
+        userId: selectedUser,
       });
 
       fetchAllTasks();
+      fetchAllUsers();
       navigate("/");
     } catch (error) {
       console.error("Error adding task:", error);
@@ -39,12 +37,17 @@ const AddTask = ({ fetchAllTasks, API_URL }) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <input
-          type="text"
-          placeholder="User"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <select
+          value={selectedUser}
+          onChange={(e) => setSelectedUser(e.target.value)}
+        >
+          <option value="">Select a user</option>
+          {users.map((user) => (
+            <option key={user.id} value={user.id}>
+              {user.name}
+            </option>
+          ))}
+        </select>
         <textarea
           placeholder="Description"
           value={description}
