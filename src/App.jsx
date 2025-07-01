@@ -1,6 +1,7 @@
+const API_URL = process.env.API_URL || "client-side-routing-backend-nine.vercel.app";
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router"; // ✅ Include Route
+import { BrowserRouter as Router, Routes, Route } from "react-router"; 
 import axios from "axios";
 import "./AppStyles.css";
 import TaskList from "./components/TaskList";
@@ -8,9 +9,7 @@ import AddTask from "./components/AddTask";
 import NavBar from "./components/NavBar";
 import TaskDetail from "./components/TaskDetails";
 
-//const API_URL = process.env.API_URL || "http://localhost:8080";
-const API_URL = "http://localhost:8080";
-
+const API_URL = process.env.API_URL || "http://localhost:8080";
 const App = () => {
   const [tasks, setTasks] = useState([]);
 
