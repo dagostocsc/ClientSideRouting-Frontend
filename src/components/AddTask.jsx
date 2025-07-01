@@ -3,19 +3,25 @@ import axios from "axios";
 import "./AddTaskStyles.css";
 import { useNavigate } from "react-router";
 
-const AddTask = ({ fetchAllTasks }) => {
+const AddTask = ({ fetchAllTasks, API_URL }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [name, setName] = useState("");
 
   let navigate = useNavigate(); //Created the navigate function
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8080/api/tasks", {
+      await axios.post(`${API_URL}/api/tasks`, {
         title,
         description,
       });
+
+      await axios.post(`${API_URL}/api/users`, {
+        name,
+      });
+
       fetchAllTasks();
       navigate("/");
     } catch (error) {
@@ -32,6 +38,12 @@ const AddTask = ({ fetchAllTasks }) => {
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="User"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <textarea
           placeholder="Description"

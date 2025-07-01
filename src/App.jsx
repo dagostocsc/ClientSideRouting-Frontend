@@ -7,7 +7,9 @@ import "./AppStyles.css";
 import TaskList from "./components/TaskList";
 import AddTask from "./components/AddTask";
 import NavBar from "./components/NavBar";
+import TaskDetail from "./components/TaskDetails";
 
+const API_URL = process.env.API_URL || "http://localhost:8080";
 const App = () => {
   const [tasks, setTasks] = useState([]);
 
@@ -40,7 +42,7 @@ const App = () => {
         />
         <Route
           path="/add-task"
-          element={<AddTask fetchAllTasks={fetchAllTasks} />}
+          element={<AddTask fetchAllTasks={fetchAllTasks} API_URL={API_URL} />}
         />
         <Route
           path="/completed"
@@ -62,6 +64,7 @@ const App = () => {
             />
           }
         />
+        <Route path="/tasks/:id" element={<TaskDetail API_URL={API_URL} />} />
       </Routes>
     </div>
   );
