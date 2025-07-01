@@ -29,13 +29,22 @@ import { useParams } from "react-router";
 const TaskDetail = ({ API_URL }) => {
   const [task, setTask] = useState(null);
   const { id } = useParams();
+  const [user, setUser] = useState(null);
+
   console.log("Fetching task with ID:", id);
 
   useEffect(() => {
     async function fetchTask() {
       try {
-        const response = await axios.get(`${API_URL}/api/tasks/${id}`);
-        setTask(response.data);
+        const taskResponse = await axios.get(`${API_URL}/api/tasks/${id}`);
+        setTask(taskResponse.data);
+
+        if (taskResponse.data.userId) {
+          const userResponse = await axios.get(
+            `${API_URL}/api/users/${taskResponse.data.userId}`
+          );
+          setUser(userResponse.data);
+        }
       } catch (error) {
         console.error("Error fetching tasks:", error);
       }
@@ -52,7 +61,7 @@ const TaskDetail = ({ API_URL }) => {
         <h2>{task.title}</h2>
       </div>
       <p>Description: {task.description}</p>
-      <p>User ID: {task.userId}</p>
+      <p>User ID: {user?.name}</p>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 const AddTask = ({ fetchAllTasks, API_URL }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [name, setName] = useState("");
 
   let navigate = useNavigate(); //Created the navigate function
 
@@ -16,6 +17,11 @@ const AddTask = ({ fetchAllTasks, API_URL }) => {
         title,
         description,
       });
+
+      await axios.post(`${API_URL}/api/users`, {
+        name,
+      });
+
       fetchAllTasks();
       navigate("/");
     } catch (error) {
@@ -32,6 +38,12 @@ const AddTask = ({ fetchAllTasks, API_URL }) => {
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="User"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <textarea
           placeholder="Description"
