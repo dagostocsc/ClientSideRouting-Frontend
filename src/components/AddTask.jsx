@@ -3,7 +3,7 @@ import axios from "axios";
 import "./AddTaskStyles.css";
 import { useNavigate } from "react-router";
 
-const AddTask = ({ fetchAllTasks }) => {
+const AddTask = ({ fetchAllTasks, API_URL }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -12,7 +12,7 @@ const AddTask = ({ fetchAllTasks }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8080/api/tasks", {
+      await axios.post(`${API_URL}/api/tasks`, {
         title,
         description,
       });

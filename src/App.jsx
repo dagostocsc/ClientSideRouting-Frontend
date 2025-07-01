@@ -41,7 +41,7 @@ const App = () => {
         />
         <Route
           path="/add-task"
-          element={<AddTask fetchAllTasks={fetchAllTasks} />}
+          element={<AddTask fetchAllTasks={fetchAllTasks} API_URL={API_URL} />}
         />
         <Route
           path="/completed"
