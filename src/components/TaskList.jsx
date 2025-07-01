@@ -1,7 +1,7 @@
 import React from "react";
 import TaskCard from "./TaskCard";
 
-const TaskList = ({ tasks, fetchAllTasks }) => {
+const TaskList = ({ tasks, fetchAllTasks, API_URL }) => {
   return (
     <div>
       {tasks.length > 0 ? (
@@ -10,6 +10,7 @@ const TaskList = ({ tasks, fetchAllTasks }) => {
             key={task.id}
             task={task}
             fetchAllTasks={fetchAllTasks}
+            API_URL={API_URL}
           ></TaskCard>
         ))
       ) : (
