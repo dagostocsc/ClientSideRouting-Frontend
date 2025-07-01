@@ -26,6 +26,18 @@ const NavBar = () => {
       >
         Add Task
       </NavLink>
+      <NavLink
+        to="/add-user"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        Add User
+      </NavLink>
+      <NavLink
+        to="/user-list"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        All Users
+      </NavLink>
     </nav>
   );
 };

@@ -14,7 +14,7 @@ const TaskDetail = ({ API_URL }) => {
         const taskResponse = await axios.get(`${API_URL}/api/tasks/${id}`);
         setTask(taskResponse.data);
 
-        console.log("Fetching task with USER ID:", taskResponse.data.userId);
+        //console.log("Fetching task with USER ID:", taskResponse.data.userId);
         if (taskResponse.data.userId) {
           const userResponse = await axios.get(
             `${API_URL}/api/users/${taskResponse.data.userId}`
@@ -28,7 +28,7 @@ const TaskDetail = ({ API_URL }) => {
     }
 
     fetchTask();
-  }, [id]);
+  }, []);
 
   if (!task) return;
 
