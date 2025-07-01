@@ -30,7 +30,13 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<TaskList tasks={tasks} fetchAllTasks={fetchAllTasks} />}
+          element={
+            <TaskList
+              tasks={tasks}
+              fetchAllTasks={fetchAllTasks}
+              API_URL={API_URL}
+            />
+          }
         />
         <Route
           path="/add-task"
@@ -40,8 +46,9 @@ const App = () => {
           path="/completed"
           element={
             <TaskList
-              tasks={tasks.filter(task => task.completed)}
+              tasks={tasks.filter((task) => task.completed)}
               fetchAllTasks={fetchAllTasks}
+              API_URL={API_URL}
             />
           }
         />
@@ -49,8 +56,9 @@ const App = () => {
           path="/incomplete"
           element={
             <TaskList
-              tasks={tasks.filter(task => !task.completed)}
+              tasks={tasks.filter((task) => !task.completed)}
               fetchAllTasks={fetchAllTasks}
+              API_URL={API_URL}
             />
           }
         />
